@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import asyncHandler from "express-async-handler";
 import Sale from "../models/Sale.js";
+import dotenv from "dotenv";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
