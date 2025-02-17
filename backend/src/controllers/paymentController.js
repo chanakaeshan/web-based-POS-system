@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import Sale from "../models/Sale.js";
 import dotenv from "dotenv";
 
+dotenv.config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create a Stripe Payment Intent
