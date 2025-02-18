@@ -7,7 +7,21 @@ import mongoose from "mongoose";
 export const getSalesReport = asyncHandler(async (req, res) => {
   const { startDate, endDate } = req.query;
 
+
+  let matchQuery = {
+    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+  };
+
+  if (category) {
+    const categoryProducts = await Product.find({ category }).select("_id");
+    const productIds = categoryProducts.map((p) => p._id);
+    matchQuery["items.product"] = { $in: productIds };
+  }
+
   const sales = await Sale.aggregate([
+    { $match: matchQuery },
+    { $unwind: "$items" },
+
     {
       $match: {
         createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
@@ -63,4 +77,5 @@ export const getLowStockProducts = asyncHandler(async (req, res) => {
     "name stock"
   );
   res.json(lowStockProducts);
+  res.json(sales[0] || { totalSales: 0, totalRevenue: 0 });
 });
