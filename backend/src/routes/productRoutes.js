@@ -34,4 +34,10 @@ router.put("/:id", protect, authorizeRoles("admin", "stock_manager"), updateProd
 
 router.delete("/:id", protect, authorizeRoles("admin", "stock_manager"), deleteProduct);
 
+// 📌 Get all product categories
+router.get("/categories", async (req, res) => {
+  const categories = await Product.distinct("category");
+  res.json(categories);
+});
+
 export default router;
