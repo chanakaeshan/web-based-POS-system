@@ -2,6 +2,11 @@ import asyncHandler from "express-async-handler";
 import Sale from "../models/Sale.js";
 import Product from "../models/Product.js";
 import mongoose from "mongoose";
+import PDFDocument from "pdfkit";
+import ExcelJS from "exceljs";
+import fs from "fs";
+import Sale from "../models/Sale.js";
+
 
 // 📊 Get total sales and revenue
 export const getSalesReport = asyncHandler(async (req, res) => {
