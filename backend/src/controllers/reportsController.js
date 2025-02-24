@@ -6,6 +6,8 @@ import PDFDocument from "pdfkit";
 import ExcelJS from "exceljs";
 import fs from "fs";
 import Sale from "../models/Sale.js";
+import path from "path"
+import { sendReportEmail } from "../utils/emailService.js";
 
 
 // 📊 Get total sales and revenue
@@ -83,4 +85,54 @@ export const getLowStockProducts = asyncHandler(async (req, res) => {
   );
   res.json(lowStockProducts);
   res.json(sales[0] || { totalSales: 0, totalRevenue: 0 });
+});
+
+// 📄 Generate PDF Report & Send Email
+export const emailPDFReport = asyncHandler(async (req, res) => {
+  const { startDate, endDate, email } = req.body;
+  const sales = await Sale.find({
+    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+  });
+
+  const filename = `sales-report-${Date.now()}.pdf`;
+  const filePath = path.join("reports", filename);
+  const doc = new PDFDocument();
+  doc.pipe(fs.createWriteStream(filePath));
+
+  doc.fontSize(16).text("Sales Report", { align: "center" });
+  doc.moveDown();
+  sales.forEach((sale, index) => {
+    doc.text(`Sale #${index + 1}`, { underline: true });
+    doc.text(`Date: ${sale.createdAt}`);
+    doc.text(`Total Amount: $${sale.totalAmount}`);
+    doc.moveDown();
+  });
+  doc.end();
+
+  await sendReportEmail(email, "Sales Report (PDF)", "Please find the attached sales report.", filePath);
+  res.json({ message: "Report emailed successfully!" });
+});
+
+// 📊 Generate Excel Report & Send Email
+export const emailExcelReport = asyncHandler(async (req, res) => {
+  const { startDate, endDate, email } = req.body;
+  const sales = await Sale.find({
+    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
+  });
+
+  const filename = `sales-report-${Date.now()}.xlsx`;
+  const filePath = path.join("reports", filename);
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Sales Report");
+
+  worksheet.columns = [
+    { header: "Sale ID", key: "_id", width: 30 },
+    { header: "Date", key: "createdAt", width: 20 },
+    { header: "Total Amount ($)", key: "totalAmount", width: 15 },
+  ];
+  sales.forEach((sale) => worksheet.addRow(sale));
+
+  await workbook.xlsx.writeFile(filePath);
+  await sendReportEmail(email, "Sales Report (Excel)", "Please find the attached sales report.", filePath);
+  res.json({ message: "Report emailed successfully!" });
 });
