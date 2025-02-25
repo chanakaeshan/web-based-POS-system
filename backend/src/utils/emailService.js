@@ -10,6 +10,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// 📌 Send Low Stock Alert
+export const sendLowStockAlert = async (to, products) => {
+  const productList = products
+    .map((p) => `🔻 ${p.name} - Only ${p.stock} left`)
+    .join("\n");
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject: "⚠️ Low Stock Alert!",
+    text: `The following products are low in stock:\n\n${productList}`,
+  };
+};
+
 // 📌 Send Email with Attachment
 export const sendReportEmail = async (to, subject, text, attachmentPath) => {
   const mailOptions = {
