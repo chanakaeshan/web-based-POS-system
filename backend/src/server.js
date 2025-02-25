@@ -5,3 +5,4 @@ import "./utils/scheduler.js";
 
 app.use("/api/reports", reportRoutes);
 app.use("/api/products", productRoutes);
+import "./utils/scheduler.js";
