@@ -31,3 +31,4 @@ export const updateStock = asyncHandler(async (req, res) => {
   emitStockUpdate(product); // 🔄 Broadcast stock update
   res.json(product);
 });
+

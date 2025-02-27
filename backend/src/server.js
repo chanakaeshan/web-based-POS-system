@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/inventoryRoutes.js";
+import http from "http";
 
 dotenv.config();
 connectDB();
@@ -30,7 +31,20 @@ io.on("connection", (socket) => {
   // 📌 Emit Stock Update Event
 export const emitStockUpdate = (product) => {
     io.emit("stockUpdated", product);
+    if (product.stock < 5) {
+      io.emit("lowStockAlert", product);
+    }
   };
+
+  // 📌 WebSocket Event for Stock Updates
+io.on("connection", (socket) => {
+  console.log("🟢 A user connected");
+
+  socket.on("disconnect", () => {
+    console.log("🔴 A user disconnected");
+  });
+});
+
 
 
 app.use("/api/inventory", productRoutes);
