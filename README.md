@@ -50,4 +50,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For more information or support, please contact [chanakaeshan](https://github.com/chanakaeshan).
+For more information or support, please get in touch with [chanakaeshan](https://github.com/chanakaeshan).
