@@ -44,9 +44,6 @@ A fully functional web-based Point of Sale (POS) system built with JavaScript. T
 
 Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
