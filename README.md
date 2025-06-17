@@ -39,7 +39,6 @@ A fully functional web-based Point of Sale (POS) system built with JavaScript. T
 ## Screenshots
 
 
-
 ## Contributing
 
 Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
