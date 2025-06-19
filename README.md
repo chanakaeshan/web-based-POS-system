@@ -33,8 +33,6 @@ A fully functional web-based Point of Sale (POS) system built with JavaScript. T
 3. **Run the application:**  
    (Describe how to start the app, e.g., `npm start`, or open `index.html` in your browser.)
 
-4. **Configuration:**  
-   (Add any configuration/setup instructions if needed.)
 
 ## Screenshots
 
