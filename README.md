@@ -45,4 +45,4 @@ Contributions are welcome! Please open issues or submit pull requests for improv
 
 ## Contact
 
-For more information or support, please get in touch with [chanakaeshan](https://github.com/chanakaeshan).
+For more information or support, please contact [chanakaeshan](https://github.com/chanakaeshan).
