@@ -6,7 +6,7 @@ A fully functional web-based Point of Sale (POS) system built with JavaScript. T
 
 - **User Authentication:** Secure login and user management for staff.
 - **Product Management:** Add, edit, and delete products with categories and pricing.
-- **Inventory Management:** Track stock levels and update inventory in real-time.
+- **Inventory Management:** Track stock levels and update inventory in real time.
 - **Sales Processing:** Generate sales receipts, manage cart, and process payments.
 - **Reporting:** View sales summaries, transaction histories, and inventory reports.
 - **Customer Management:** Store and manage customer details and transaction histories.
