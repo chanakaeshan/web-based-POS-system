@@ -3,7 +3,6 @@
 A fully functional web-based Point of Sale (POS) system built with JavaScript. This project aims to provide a seamless and user-friendly interface for managing sales, inventory, and customer transactions via any modern web browser.
 
 
-
 ## Features
 
 - **User Authentication:** Secure login and user management for staff.
